@@ -25,4 +25,16 @@ describe("Surface", function(){
             expect(height).to.equal(5); 
         });
     });
+
+
+    describe("#init()", function() {
+        var height = 10;
+        var width = 10;
+
+        it("should init " + width + " by " + height + " surface", function() {
+            surface.init(width, height);
+            expect(surface.width()).to.equal(width); 
+            expect(surface.height()).to.equal(height); 
+        });
+    });
 });
