@@ -8,21 +8,21 @@ describe("Robot", function() {
     describe("#x", function() {
         it("should return x position of robot as null", function(){
             var x = robot.x;
-            expect(x).to.equal(null);
+            expect(x).to.be.null;
         });
     });
     
     describe("#y", function() {
         it("should return y position of robot as null", function(){
             var y = robot.y;
-            expect(y).to.equal(null);
+            expect(y).to.be.null;
         });
     });
     
     describe("#direction", function() {
         it("should return faced direction of robot as null", function(){
             var direction = robot.direction;
-            expect(direction).to.equal(null);
+            expect(direction).to.be.null;
         });
     });
     
@@ -142,4 +142,53 @@ describe("Robot", function() {
 
     });
 
+    describe("#report()", function() {
+        it("should report robots position", function() {
+            expect(robot.report).to.exist;;
+        });
+    });
+
+    describe("#right()", function() {
+        var directions_last = robot.directions.length - 1;
+        for (var i = directions_last; i >= 0; i--) {
+            (function(i) {
+                if (i === directions_last) {
+                    it("should turn robot from " + robot.directions[directions_last] + " to " + robot.directions[0], function() {
+                        robot.direct(robot.directions[directions_last]);
+                        robot.right();
+                        expect(robot.direction).to.equal(robot.directions[0]);
+                    });
+                } else {
+                    it("should turn robot from " + robot.directions[i] + " to " + robot.directions[i + 1], function() {
+                        robot.direct(robot.directions[i]);
+                        robot.right();
+                        expect(robot.direction).to.equal(robot.directions[i + 1]);
+                    });
+                }
+            })(i);
+        };
+    });
+
+    describe("#left()", function() {
+        var directions_last = robot.directions.length - 1;
+        for (var i = directions_last; i >= 0; i--) {
+            
+            (function(i) {
+                if (i !== 0) {
+                    it("should turn robot from " + robot.directions[i] + " to " + robot.directions[i - 1], function() {
+                        robot.direct(robot.directions[i]);
+                        robot.left();
+                        expect(robot.direction).to.equal(robot.directions[i]);
+                    });
+                } else {
+                    it("should turn robot from " + robot.directions[0] + " to " + robot.directions[directions_last], function() {
+                        robot.direct(robot.directions[0]);
+                        robot.left();
+                        expect(robot.direction).to.equal(robot.directions[directions_last]);
+                    });
+                }
+            })(i);
+
+        };
+    });
 });
