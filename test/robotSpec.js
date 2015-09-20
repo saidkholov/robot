@@ -5,27 +5,6 @@ var surface = require("../lib/surface");
 
 describe("Robot", function() {
     
-    describe("#x", function() {
-        it("should return x position of robot as null", function(){
-            var x = robot.x;
-            expect(x).to.be.null;
-        });
-    });
-    
-    describe("#y", function() {
-        it("should return y position of robot as null", function(){
-            var y = robot.y;
-            expect(y).to.be.null;
-        });
-    });
-    
-    describe("#direction", function() {
-        it("should return faced direction of robot as null", function(){
-            var direction = robot.direction;
-            expect(direction).to.be.null;
-        });
-    });
-    
     describe("#place()", function() {
 
         var x = 1;
@@ -54,14 +33,38 @@ describe("Robot", function() {
         }); 
 
     });
+
+    describe("reset()", function() {
+        it("should remove robot from the surface", function() {
+            robot.reset();
+            expect(robot.x).to.be.null;
+            expect(robot.y).to.be.null;
+            expect(robot.direction).to.be.null;
+        });
+    });
     
     describe("#direct()", function() {
-        for (var i = robot.directions.length - 1; i >= 0; i--) {
-            it("should direct the robot to " + robot.directions[i], function() {
-                robot.direct(robot.directions[i]);
-                expect(robot.direction).to.equal(robot.directions[i]);
+        context("when valid direction supplied", function() {
+            for (var i = robot.directions.length - 1; i >= 0; i--) {
+                (function(i) {
+                    it("should direct the robot to " + robot.directions[i], function() {
+                        robot.direct(robot.directions[i]);
+                        expect(robot.direction).to.equal(robot.directions[i]);
+                    });
+                })(i);
+            };
+        });
+        context("when invalid direction supplied", function() {
+            it("position should not changes", function() {
+                var x = robot.x;
+                var y = robot.y;
+                var direction = robot.direction;
+                robot.direct("wrong place");
+                expect(x).to.equal(robot.x);
+                expect(y).to.equal(robot.y);
+                expect(direction).to.equal(robot.direction);
             });
-        };
+        });
     });
 
     describe("#moveNorth()", function() {
@@ -178,7 +181,7 @@ describe("Robot", function() {
                     it("should turn robot from " + robot.directions[i] + " to " + robot.directions[i - 1], function() {
                         robot.direct(robot.directions[i]);
                         robot.left();
-                        expect(robot.direction).to.equal(robot.directions[i]);
+                        expect(robot.direction).to.equal(robot.directions[i - 1]);
                     });
                 } else {
                     it("should turn robot from " + robot.directions[0] + " to " + robot.directions[directions_last], function() {

@@ -1,8 +1,8 @@
-//Surface module test
+// Surface module test
+// ================================================
 
 var expect = require("chai").expect;
 var surface = require("../lib/surface");
-
 
 describe("Surface", function(){
     describe("#width()", function(){
@@ -25,7 +25,6 @@ describe("Surface", function(){
             expect(height).to.equal(5); 
         });
     });
-
 
     describe("#init()", function() {
         var height = 10;
