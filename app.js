@@ -14,8 +14,9 @@ var help = require("./lib/help.js");
 // when --file argument specified override further instructions
 if(argv.file) {
 	fs = require('fs');
+	var file_base = "robot-instructions/";
 	try {
-		var input  = fs.readFileSync(argv.file).toString();
+		var input  = fs.readFileSync(file_base + argv.file).toString().trim();
 	} catch(e) {
 		console.error(e);
 		process.exit(0);
