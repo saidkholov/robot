@@ -8,7 +8,7 @@ describe("Robot", function() {
     describe("#place()", function() {
 
         var x = 1;
-        var y = 3
+        var y = 3;
 
         it("should place robot on position x:" + x + ", y:" + y, function() {
             robot.place(x,y);
@@ -52,7 +52,7 @@ describe("Robot", function() {
                         expect(robot.direction).to.equal(robot.directions[i]);
                     });
                 })(i);
-            };
+            }
         });
         context("when invalid direction supplied", function() {
             it("position should not changes", function() {
@@ -147,7 +147,7 @@ describe("Robot", function() {
 
     describe("#report()", function() {
         it("should report robots position", function() {
-            expect(robot.report).to.exist;;
+            expect(robot.report).to.exist;
         });
     });
 
@@ -169,13 +169,12 @@ describe("Robot", function() {
                     });
                 }
             })(i);
-        };
+        }
     });
 
     describe("#left()", function() {
         var directions_last = robot.directions.length - 1;
         for (var i = directions_last; i >= 0; i--) {
-            
             (function(i) {
                 if (i !== 0) {
                     it("should turn robot from " + robot.directions[i] + " to " + robot.directions[i - 1], function() {
@@ -191,7 +190,6 @@ describe("Robot", function() {
                     });
                 }
             })(i);
-
-        };
+        }
     });
 });
