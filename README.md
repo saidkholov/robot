@@ -34,6 +34,17 @@ All option that start with "--" accept parameters and execute a specific command
 | left			| turns robot 90 degrees to the left anticlockwise													|
 | report		| report the robot's current position																|
 
+### Example 
+
+```
+$ ./app.js --place 1,2,north move right report
+
+$ ./app.js --place=1,2,west left left move report
+
+$ ./app.js --file=1.txt
+````
+
+
 
 ## Testing
 
